@@ -1,0 +1,27 @@
+.jumbotron {
+    margin-bottom: 0px;
+    background-image: url(../images/train.png);
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #08234f;
+}
+
+.panel-default>.panel-heading {
+    background-color: #08234f;
+    color:white;
+}
+
+div.panel-heading {
+	font color: #fff;
+}
+
+.panel-heading {
+    color:white;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #08234f;
+    border-color: #2e6da4;
+}
