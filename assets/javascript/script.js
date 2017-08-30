@@ -35,14 +35,6 @@ $("#addTrain").on('click', function(event) {
 database.ref().orderByChild("dateAdded").limitToLast(10).on("child_added", function(snapshot) {
 
     var sv = snapshot.val();
-    var difference = moment().diff(moment.unix(sv.firstTrain), "minutes");
-    var remainder = moment().diff(moment.unix(firstTrain), "minutes") % frequency ;
-    var minutes = sv.frequency - remainder;
-
-    var arrival = moment().add(minutes, "m").format("hh:mm A");
-
-    console.log(minutes);
-    console.log(arrival);
 
     // console.log(snapshot.val());
 
