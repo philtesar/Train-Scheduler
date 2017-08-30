@@ -20,13 +20,14 @@ $("#addTrain").on('click', function(event) {
 
     name = $("#name").val().trim();
     destination = $("#destination").val().trim();
-    firstTrain = moment($("#firstTrain").val(), "HH:mm").subtract(10, "years").format("X");
+    firstTrain = moment($("#firstTrain").val()).format("hh:mm A");
     frequency = $("#frequency").val().trim();
 
     database.ref().push({
         name: name,
         destination: destination,
         frequency: frequency,
+        firstTrain: firstTrain,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
 
     });
@@ -34,20 +35,36 @@ $("#addTrain").on('click', function(event) {
 
 database.ref().on("child_added", function(snapshot) {
 
-    console.log(snapshot.val());
+    // console.log(snapshot.val());
 
     var trainName = snapshot.val().name;
     var trainDestination = snapshot.val().destination;
     var trainFirstTrain = snapshot.val().firstTrain;
     var trainFrequency = snapshot.val().frequency;
 
-    var difference = moment().diff(moment.unix(trainFirstTrain), "minutes");
-    var remaining = moment().diff(moment.unix(firstTrain), "minutes") % trainFrequency;
+    var currentTime = moment();
+
+
+    var difference = moment().diff(moment(firstTrain), "minutes");
+    console.log(firstTrain);
+    
+    // console.log("typeof firstTrain", typeof firstTrain + " " + firstTrain);
+    // console.log("typeof trainFirstTrain", typeof trainFirstTrain + " " + trainFirstTrain);
+    
+    var tRemainder = diffTime % tFrequency;
+    
+    // console.log(moment.unix(trainFirstTrain));
+    // console.log(moment().diff(moment.unix(trainFirstTrain), "minutes"));
+    // console.log(remaining);
+    
     var minutes = trainFrequency - remaining;
 
     var arrival = moment().add(minutes, "m").format("hh:mm A");
-    console.log(minutes);
-    console.log(arrival);
+    
+    // console.log(trainFirstTrain);
+    // console.log(firstTrain);
+    // console.log(minutes);
+    // console.log(arrival);
 
 
     var newRow = $('<tr>');
