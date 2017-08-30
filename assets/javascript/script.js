@@ -42,7 +42,7 @@ database.ref().on("child_added", function(snapshot) {
     var trainFrequency = snapshot.val().frequency;
 
     var difference = moment().diff(moment.unix(trainFirstTrain), "minutes");
-    var remaining = moment().diff(moment.unix(trainFirstTrain), "minutes") % trainFrequency;
+    var remaining = moment().diff(moment.unix(firstTrain), "minutes") % trainFrequency;
     var minutes = trainFrequency - remaining;
 
     var arrival = moment().add(minutes, "m").format("hh:mm A");
